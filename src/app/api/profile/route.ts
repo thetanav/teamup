@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getProfile, updateProfile } from "@/server/profileActions";
 import { auth } from "@/server/auth/index";
-import { success } from "zod/v4";
 
 export async function GET(req: NextRequest) {
   const session = await auth();
@@ -19,6 +18,5 @@ export async function POST(req: NextRequest) {
   }
   const data = await req.json();
   const updated = await updateProfile(session.user.email, data);
-  console.log("u", updated);
   return NextResponse.json(updated);
 } 

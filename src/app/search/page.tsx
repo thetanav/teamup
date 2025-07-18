@@ -1,17 +1,25 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { db } from "@/server/db";
-import { and, eq, ilike, or } from "drizzle-orm";
+import { eq, ilike, or } from "drizzle-orm";
 import { users } from "@/server/db/schema";
 import Link from "next/link";
 
 export default async function SearchPage() {
     // the search filter must work
-    const city = "chandigarh";
-    const college = "cgc"
+    const city = "";
+    const college = ""
+    const course = ""
+    const skills = "ts, go"
 
     const usrs = await db.select().from(users).where(
-        and(or(ilike(users.college, `%${college}%`), ilike(users.city, `%${city}%`)), eq(users.available, true))
+        or(
+            ilike(users.college, `%${college}%`),
+            ilike(users.city, `%${city}%`),
+            ilike(users.skills, `%${skills}%`),
+            ilike(users.course, `%${course}%`),
+            eq(users.available, true)
+        ),
     ).limit(10);
 
     return (
@@ -26,7 +34,7 @@ export default async function SearchPage() {
                             <Input type="text" placeholder="e.g. Computer Science" />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium mb-1">Skills</label>
+                            <label className="block text-sm font-medium mb-1">Skills (seperated by commas)</label>
                             <Input type="text" placeholder="e.g. React, Python" />
                         </div>
 

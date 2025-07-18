@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className="flex items-center justify-between w-full h-14 px-6 border-b bg-transparent backdrop-blur-md">
       <div className="flex items-center">
         <Link href="/">
-        <span className="text-xl font-bold tracking-tight select-none">TeamUp</span>
+        <span className="text-xl font-bold tracking-tight select-none">teamupp</span>
         </Link>
       </div>
       <div className="flex items-center">
