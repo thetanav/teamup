@@ -1,45 +1,49 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { db } from "@/server/db";
-import { eq, ilike, or } from "drizzle-orm";
+import { and, eq, ilike, or } from "drizzle-orm";
 import { users } from "@/server/db/schema";
 import Link from "next/link";
 
-export default async function SearchPage() {
-    // the search filter must work
-    const city = "";
-    const college = ""
-    const course = ""
-    const skills = "ts, go"
+export default async function SearchPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }> }) {
+    const { city, college, course, skills } = await searchParams;
 
     const usrs = await db.select().from(users).where(
-        or(
-            ilike(users.college, `%${college}%`),
-            ilike(users.city, `%${city}%`),
-            ilike(users.skills, `%${skills}%`),
-            ilike(users.course, `%${course}%`),
+        and(
+            or(
+                ilike(users.college, `%${college}%`),
+                ilike(users.city, `%${city}%`),
+                ilike(users.skills, `%${skills}%`),
+                ilike(users.course, `%${course}%`)
+            ),
             eq(users.available, true)
         ),
     ).limit(10);
 
     return (
         <main className="flex min-h-[80vh] px-4 py-12 bg-background">
-            {/* Left Sidebar: Advanced Search */}
             <aside className="w-full max-w-xs pr-8 hidden md:block">
                 <div className="sticky top-24 flex flex-col gap-6 bg-card p-6 rounded-lg shadow">
                     <h2 className="text-xl font-semibold mb-2">Advanced Search</h2>
-                    <div className="flex flex-col gap-4">
+                    <form method="GET" className="flex flex-col gap-4">
                         <div>
                             <label className="block text-sm font-medium mb-1">Course</label>
-                            <Input type="text" placeholder="e.g. Computer Science" />
+                            <Input name="course" type="text" placeholder="e.g. Computer Science" defaultValue={course} />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium mb-1">Skills (seperated by commas)</label>
-                            <Input type="text" placeholder="e.g. React, Python" />
+                            <label className="block text-sm font-medium mb-1">Skills (separated by commas)</label>
+                            <Input name="skills" type="text" placeholder="e.g. React, Python" defaultValue={skills} />
                         </div>
-
-                        <Button className="mt-2 w-full">Apply Filters</Button>
-                    </div>
+                        <div>
+                            <label className="block text-sm font-medium mb-1">College</label>
+                            <Input name="college" type="text" placeholder="e.g. IIT Delhi" defaultValue={college} />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium mb-1">City</label>
+                            <Input name="city" type="text" placeholder="e.g. Mumbai" defaultValue={city} />
+                        </div>
+                        <Button className="mt-2 w-full" type="submit">Apply Filters</Button>
+                    </form>
                 </div>
             </aside>
 
@@ -47,10 +51,11 @@ export default async function SearchPage() {
             <section className="flex-1 flex flex-col items-center">
                 <div className="w-full max-w-2xl mx-auto flex flex-col gap-4 mb-8">
                     <h1 className="text-4xl font-extrabold tracking-tight leading-tight mb-2">Search for your team</h1>
-                    <div className="w-full flex gap-2 items-center">
-                        <Input type="text" placeholder="Search by college or city..." className="flex-1" />
-                        <Button>Search</Button>
-                    </div>
+                    <form method="GET" className="w-full flex gap-2 items-center">
+                        <Input name="college" type="text" placeholder="Search by college or city..." className="flex-1" defaultValue={college} />
+                        <Input name="city" type="text" placeholder="City" className="flex-1" defaultValue={city} />
+                        <Button type="submit">Search</Button>
+                    </form>
                 </div>
                 {/* Placeholder for search results */}
                 <div className="w-full max-w-2xl mx-auto bg-card rounded-lg shadow p-8 flex flex-col min-h-[300px] overflow-y-auto">

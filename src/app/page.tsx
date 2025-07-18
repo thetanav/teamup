@@ -13,14 +13,19 @@ export default function HomePage() {
         <p className="text-lg text-muted-foreground mb-4">
           TeamUp helps you connect with like-minded people from your own college or city to build amazing teams for projects, hackathons, and more.
         </p>
-        <div className="w-full flex flex-col sm:flex-row gap-2 items-center justify-center">
+        <form
+          action="/search"
+          method="GET"
+          className="w-full flex flex-col sm:flex-row gap-2 items-center justify-center"
+        >
           <Input
             type="text"
+            name="city"
             placeholder="Search by college or city..."
             className="max-w-xs"
           />
-          <Button>Search</Button>
-        </div>
+          <Button type="submit">Search</Button>
+        </form>
         <span className="text-xs text-muted-foreground mt-1">(Search to see magic!)</span>
       </section>
 

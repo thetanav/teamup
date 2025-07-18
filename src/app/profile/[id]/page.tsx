@@ -3,8 +3,13 @@ import { db } from "@/server/db";
 import { users } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 
-export default async function Page({ params }: { params: { id: string } }) {
-    const user = (await db.select().from(users).where(eq(users.id, params.id)))[0];
+export default async function Page({
+    params,
+}: {
+    params: Promise<{ id: string }>
+}) {
+    const { id } = await params
+    const user = (await db.select().from(users).where(eq(users.id, id)))[0];
 
     if (!user) {
         return (
@@ -18,7 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <main className="flex min-h-[60vh] items-center justify-center bg-background px-4">
             <section className="w-full max-w-2xl flex flex-col sm:flex-row items-start gap-8 py-16">
                 <img
-                    src={`https://avatar.vercel.sh/${params.id}`}
+                    src={`https://avatar.vercel.sh/${user.email}`}
                     alt="Profile Icon"
                     className="w-28 h-28 rounded-full object-cover border-2 border-border bg-muted flex-shrink-0"
                 />
