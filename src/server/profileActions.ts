@@ -12,7 +12,8 @@ export async function getProfile(email: string) {
         name: user?.name,
         college: user?.college,
         course: user?.course,
-        session: user?.session,
+        city: user?.city,
+        available: user?.available,
         bio: user?.bio,
         skills: user?.skills,
     };
@@ -27,7 +28,8 @@ export async function updateProfile(email: string, data: any) {
             name: users.name,
             college: users.college,
             course: users.course,
-            session: users.session,
+            city: users.city,
+            available: users.available,
             bio: users.bio,
             skills: users.skills,
         })

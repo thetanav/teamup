@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react"
 import { toast } from "sonner";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Page() {
   const { data: session } = useSession();
@@ -122,18 +123,29 @@ export default function Page() {
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium" htmlFor="session">
-            Session (202X)
+          <label className="block mb-1 font-medium" htmlFor="city">
+            City
           </label>
           <Input
-            id="session"
-            name="session"
-            placeholder="Session"
-            value={form.session || ""}
+            id="city"
+            name="city"
+            placeholder="City"
+            value={form.city || ""}
             onChange={handleChange}
             disabled={!editMode}
             required
           />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium" htmlFor="available">
+            Available for Hackthons
+          </label>
+          <div className="flex items-center gap-3">
+            <Checkbox id="available" name="available"  disabled={!editMode} checked={form.available} onCheckedChange={(checked) => {
+              setForm({ ...form, available: checked });
+            }} />
+            <label className="block text-sm font-medium" htmlFor="terms">Available</label>
+          </div>
         </div>
         <div>
           <label className="block mb-1 font-medium" htmlFor="bio">

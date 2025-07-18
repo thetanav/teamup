@@ -8,6 +8,27 @@
       "when": 1752762519592,
       "tag": "0000_freezing_hercules",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1752855609851,
+      "tag": "0001_chief_harry_osborn",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752855708957,
+      "tag": "0002_zippy_jean_grey",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1752855726153,
+      "tag": "0003_simple_ser_duncan",
+      "breakpoints": true
     }
   ]
 }
