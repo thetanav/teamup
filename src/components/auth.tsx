@@ -33,7 +33,7 @@ export default async function Auth({ minimal }: AuthProps) {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <img
-            src={"https://avatar.vercel.sh/" + session.user.email}
+            src={session.user.image ?? `https://avatar.vercel.sh/${session.user.email}`}
             className="h-8 w-8 rounded-full border object-cover cursor-pointer"
             alt="Profile"
           />
@@ -60,7 +60,7 @@ export default async function Auth({ minimal }: AuthProps) {
   return (
     <div className="bg-accent flex w-fit items-center justify-center gap-4 rounded-lg border px-4 py-2 select-none">
       <img
-        src={"https://avatar.vercel.sh/" + session.user.id}
+        src={session.user.image ?? `https://avatar.vercel.sh/${session.user.email}`}
         className="h-10 w-10 rounded-full"
       />
       <div>

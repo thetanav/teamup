@@ -15,6 +15,7 @@ export async function getProfile(email: string) {
         city: user?.city,
         available: user?.available,
         bio: user?.bio,
+        image: user?.image,
         skills: user?.skills,
     };
 }

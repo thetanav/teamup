@@ -39,7 +39,7 @@ declare module "next-auth" {
 export const authConfig = {
   providers: [
     Resend({
-      from: "no-reply@resend.dev",
+      from: 'Teamupp <hello@mails.teamupp.tech>'
     }),
     /**
      * ...add more providers here.

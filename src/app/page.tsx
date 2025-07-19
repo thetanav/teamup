@@ -1,13 +1,17 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Auth from "@/components/auth";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
     <main className="flex flex-col items-center justify-center min-h-[80vh] px-4 py-12 gap-12 bg-background">
       {/* Hero Section */}
       <section className="flex flex-col items-center gap-4 text-center max-w-2xl">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-2">
+        <div>
+          <Image src="/logo.png" alt="teamupp" width={150} height={150} className="rounded-2xl select-none" draggable="false" />
+        </div>
+        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight sm:mb-2 mb-4">
           Find Your Perfect Team, <span className="text-primary">From Your College or City</span>
         </h1>
         <p className="text-lg text-muted-foreground mb-4">
@@ -16,7 +20,7 @@ export default function HomePage() {
         <form
           action="/search"
           method="GET"
-          className="w-full flex flex-col sm:flex-row gap-2 items-center justify-center"
+          className="w-full flex gap-2 items-center justify-center"
         >
           <Input
             type="text"

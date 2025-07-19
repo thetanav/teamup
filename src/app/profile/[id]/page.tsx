@@ -20,10 +20,10 @@ export default async function Page({
     }
 
     return (
-        <main className="flex min-h-[60vh] items-center justify-center bg-background px-4">
+        <main className="flex min-h-[60vh] items-center justify-center bg-background px-5">
             <section className="w-full max-w-2xl flex flex-col sm:flex-row items-start gap-8 py-16">
                 <img
-                    src={`https://avatar.vercel.sh/${user.email}`}
+                    src={user.image ?? `https://avatar.vercel.sh/${user.email}`}
                     alt="Profile Icon"
                     className="w-28 h-28 rounded-full object-cover border-2 border-border bg-muted flex-shrink-0"
                 />
@@ -63,7 +63,7 @@ export default async function Page({
                     {user.bio && (
                         <div className="flex flex-col gap-1">
                             <span className="text-xs text-muted-foreground mb-1">💬 Bio</span>
-                            <div className="bg-muted text-foreground text-sm rounded-2xl px-5 py-3 max-w-lg shadow-sm border border-border">
+                            <div className="bg-muted text-foreground text-sm rounded-2xl px-5 py-3 max-w-lg shadow-sm border border-border prose" style={{ whiteSpace: 'pre-line' }}>
                                 {user.bio}
                             </div>
                         </div>

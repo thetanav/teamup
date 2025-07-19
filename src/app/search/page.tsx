@@ -52,20 +52,20 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
                 <div className="w-full max-w-2xl mx-auto flex flex-col gap-4 mb-8">
                     <h1 className="text-4xl font-extrabold tracking-tight leading-tight mb-2">Search for your team</h1>
                     <form method="GET" className="w-full flex gap-2 items-center">
-                        <Input name="college" type="text" placeholder="Search by college or city..." className="flex-1" defaultValue={college} />
-                        <Input name="city" type="text" placeholder="City" className="flex-1" defaultValue={city} />
+                        <Input name="college" type="text" placeholder="Search by college..." className="flex-1" defaultValue={college} />
+                        <Input name="city" type="text" placeholder="Search by city..." className="flex-1" defaultValue={city} />
                         <Button type="submit">Search</Button>
                     </form>
                 </div>
                 {/* Placeholder for search results */}
-                <div className="w-full max-w-2xl mx-auto bg-card rounded-lg shadow p-8 flex flex-col min-h-[300px] overflow-y-auto">
+                <div className="w-full max-w-2xl mx-auto bg-card rounded-lg shadow p-6 flex flex-col min-h-[300px] overflow-y-auto">
                     {usrs && usrs.length > 0 ? (
                         <ul className="flex flex-col gap-2 w-full">
                             {usrs.map((usr) => (
                                 <Link key={usr.id} href={`/profile/${usr.id}`}>
-                                    <li className="flex gap-2 w-full p-2 rounded border hover:bg-muted cursor-pointer transition-color">
+                                    <li className="flex gap-2 w-full cursor-pointer">
                                         <img src={usr.image ?? "https://avatar.vercel.sh/" + usr.email} className="w-10 h-10 rounded-full" />
-                                        <div className="flex flex-col">
+                                        <div className="flex flex-col ml-2">
                                             <span className="text-sm font-medium font-bold">{usr.name}</span>
                                             <span className="text-xs text-muted-foreground">College: {usr.college}</span>
                                             <span className="text-xs text-muted-foreground">Course: {usr.course}</span>
