@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en" className={`${geist.variable} dark`}>
       <SessionProvider>
         <body>
-          <NextTopLoader showSpinner={true} color="#00b87c" />
+          <NextTopLoader showSpinner={false} color="#00b87c" />
           <Navbar />
           {children}
           <Toaster />

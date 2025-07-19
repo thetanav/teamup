@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, cache } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react"
 import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Upload } from "lucide-react";
+import { LoaderCircle, Upload } from "lucide-react";
 import DpUpload from "@/components/dpupload";
 
 export default function Page() {
@@ -17,15 +17,14 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (session)
-      fetch("/api/profile")
-        .then(res => res.json())
-        .then(data => {
-          setProfile(data);
-          setForm(data);
-          setLoading(false);
-        });
-  }, [])
+    fetch("/api/profile")
+      .then(res => res.json())
+      .then(data => {
+        setProfile(data);
+        setForm(data);
+        setLoading(false);
+      });
+  }, [session])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (!form) return;
@@ -65,7 +64,10 @@ export default function Page() {
     }
   };
 
-  if (loading || !form) return <div className="p-8">Loading...</div>;
+  if (loading || !form) return <div className="p-8">
+    <LoaderCircle className="animate-spin" />
+    <h3>Just a moment...</h3>
+  </div>;
 
   return (
     <div className="mx-auto max-w-screen-md p-8">
