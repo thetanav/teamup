@@ -33,15 +33,20 @@ export default async function Auth({ minimal }: AuthProps) {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <img
-            src={session.user.image ?? `https://avatar.vercel.sh/${session.user.email}`}
-            className="h-8 w-8 rounded-full border object-cover cursor-pointer"
+            src={
+              session.user.image ??
+              `https://avatar.vercel.sh/${session.user.email}`
+            }
+            className="h-8 w-8 cursor-pointer rounded-full border object-cover"
             alt="Profile"
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="mr-4 mt-1">
+        <DropdownMenuContent className="mt-1 mr-4">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem asChild><Link href="/profile">Profile</Link></DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/profile">Edit Profile</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <form
               action={async () => {
@@ -60,7 +65,9 @@ export default async function Auth({ minimal }: AuthProps) {
   return (
     <div className="bg-accent flex w-fit items-center justify-center gap-4 rounded-lg border px-4 py-2 select-none">
       <img
-        src={session.user.image ?? `https://avatar.vercel.sh/${session.user.email}`}
+        src={
+          session.user.image ?? `https://avatar.vercel.sh/${session.user.email}`
+        }
         className="h-10 w-10 rounded-full"
       />
       <div>
@@ -76,7 +83,9 @@ export default async function Auth({ minimal }: AuthProps) {
           <DropdownMenuSeparator />
           <DropdownMenuItem>Profile</DropdownMenuItem>
           <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem asChild><Link href="/profile">Profile</Link></DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/profile">Profile</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <form
               action={async () => {

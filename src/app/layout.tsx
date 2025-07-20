@@ -2,10 +2,11 @@ import "@/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 import Navbar from "@/components/navbar";
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from "nextjs-toploader";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "teamupp",
@@ -25,9 +26,10 @@ export default function RootLayout({
     <html lang="en" className={`${geist.variable} dark`}>
       <SessionProvider>
         <body>
-          <NextTopLoader showSpinner={false} color="#00b87c" />
+          <NextTopLoader showSpinner={false} color="#f2b8c6" />
           <Navbar />
           {children}
+          {/* <Footer /> */}
           <Toaster />
         </body>
       </SessionProvider>

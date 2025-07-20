@@ -33,25 +33,29 @@ export default async function HomePage() {
             <form
               action="/search"
               method="GET"
-              className="flex w-full items-center justify-center gap-2"
+              className="flex w-full flex-col items-center justify-center gap-4"
             >
-              <Input
-                type="text"
-                name="city"
-                placeholder="Search by college or city..."
-                className="max-w-xs"
-              />
-              <Button type="submit">Search</Button>
+              <div className="flex w-full max-w-lg gap-2">
+                <Input
+                  type="text"
+                  name="q"
+                  placeholder="Search teammates by college, city, course, or skills..."
+                  className="flex-1"
+                />
+                <Button type="submit">Search</Button>
+              </div>
             </form>
             <span className="text-muted-foreground mt-1 text-xs">
-              (Search to see magic!)
+              Search by anything - we'll find the best matches for you!
             </span>
           </>
         ) : (
           <>
             <Auth minimal />
             <span className="text-muted-foreground text-sm">
-              Sign up or log in to start your journey!
+              {session?.user
+                ? "Great now edit you profile!"
+                : "Sign up or log in to start your journey!"}
             </span>
           </>
         )}
@@ -62,7 +66,9 @@ export default async function HomePage() {
         <section className="flex flex-col items-center gap-2">
           <Auth minimal />
           <span className="text-muted-foreground text-sm">
-            Sign up or log in to start your journey!
+            {session.user
+              ? "Great now edit your profile!"
+              : "Sign up or log in to start your journey!"}
           </span>
         </section>
       )}
@@ -71,7 +77,7 @@ export default async function HomePage() {
       <section className="mt-8 grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
         <div className="bg-card flex flex-col items-center rounded-lg border p-6 shadow-sm">
           <span className="mb-2 text-2xl">🎓</span>
-          <h3 className="mb-1 font-semibold">College & City Based Search</h3>
+          <h3 className="mb-1 font-semibold">Advanced Search</h3>
           <p className="text-muted-foreground text-center text-sm">
             Easily find teammates from your own college or city for better
             collaboration and trust.

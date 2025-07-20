@@ -3,7 +3,7 @@
 import { useState, useEffect, cache } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LoaderCircle, Upload } from "lucide-react";
@@ -18,15 +18,17 @@ export default function Page() {
 
   useEffect(() => {
     fetch("/api/profile")
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setProfile(data);
         setForm(data);
         setLoading(false);
       });
-  }, [session])
+  }, [session]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     if (!form) return;
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -52,7 +54,7 @@ export default function Page() {
     setProfile(updated);
     setForm(updated);
     setEditMode(false);
-    toast.success("Updated")
+    toast.success("Updated");
   };
 
   const refreshProfile = async () => {
@@ -64,33 +66,31 @@ export default function Page() {
     }
   };
 
-  if (loading || !form) return <div className="p-8">
-    <LoaderCircle className="animate-spin" />
-    <h3>Just a moment...</h3>
-  </div>;
+  if (loading || !form)
+    return (
+      <div className="p-8">
+        <LoaderCircle className="animate-spin" />
+        <h3>Just a moment...</h3>
+      </div>
+    );
 
   return (
     <div className="mx-auto max-w-screen-md p-8">
-      <div className="flex items-start gap-6 mb-8">
+      <div className="mb-8 flex items-start gap-6">
         <div className="flex flex-col items-center">
-          <div className="relative group">
+          <div className="group relative">
             <img
-              src={form.image ?? `https://avatar.vercel.sh/${session?.user?.email}`}
+              src={
+                form.image ?? `https://avatar.vercel.sh/${session?.user?.email}`
+              }
               alt="Profile Icon"
-              className="w-20 h-20 rounded-full border-2 border-border object-cover transition-all duration-200 group-hover:border-primary/50"
+              className="h-20 w-20 rounded-full border-2 object-cover transition-all duration-200"
             />
-            {editMode && (
-              <div className="absolute inset-0 rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                <Upload className="w-6 h-6 text-white" />
-              </div>
-            )}
           </div>
-          {editMode && (
-            <DpUpload onUploadSuccess={refreshProfile} />
-          )}
+          {editMode && <DpUpload onUploadSuccess={refreshProfile} />}
         </div>
-        <div className="flex-1">
-          <div className="flex items-center justify-between mb-2">
+        <div className="h-full flex-1">
+          <div className="flex h-full items-center justify-between">
             <h2 className="text-2xl font-bold">Profile</h2>
             {!editMode && (
               <Button variant="outline" size="sm" onClick={handleEdit}>
@@ -99,21 +99,21 @@ export default function Page() {
             )}
           </div>
           {editMode && (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Click the upload button below to change your profile picture
             </p>
           )}
         </div>
       </div>
       <form
-        className={`space-y-6 transition-all duration-200 ${editMode ? 'bg-muted/30 rounded-lg p-6 border' : ''}`}
-        onSubmit={e => {
+        className="space-y-6 transition-all duration-200"
+        onSubmit={(e) => {
           e.preventDefault();
           handleSave();
         }}
       >
         <div>
-          <label className="block mb-1 font-medium" htmlFor="name">
+          <label className="mb-1 block font-medium" htmlFor="name">
             Name
           </label>
           <Input
@@ -127,7 +127,7 @@ export default function Page() {
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium" htmlFor="college">
+          <label className="mb-1 block font-medium" htmlFor="college">
             College
           </label>
           <Input
@@ -141,7 +141,7 @@ export default function Page() {
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium" htmlFor="course">
+          <label className="mb-1 block font-medium" htmlFor="course">
             Course
           </label>
           <Input
@@ -155,7 +155,7 @@ export default function Page() {
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium" htmlFor="city">
+          <label className="mb-1 block font-medium" htmlFor="city">
             City
           </label>
           <Input
@@ -169,18 +169,26 @@ export default function Page() {
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium" htmlFor="available">
+          <label className="mb-1 block font-medium" htmlFor="available">
             Available for Hackthons
           </label>
           <div className="flex items-center gap-3">
-            <Checkbox id="available" name="available" disabled={!editMode} checked={form.available} onCheckedChange={(checked) => {
-              setForm({ ...form, available: checked });
-            }} />
-            <label className="block text-sm font-medium" htmlFor="terms">Available</label>
+            <Checkbox
+              id="available"
+              name="available"
+              disabled={!editMode}
+              checked={form.available}
+              onCheckedChange={(checked) => {
+                setForm({ ...form, available: checked });
+              }}
+            />
+            <label className="muted block text-sm font-medium" htmlFor="terms">
+              Your profile will be visible to other users.
+            </label>
           </div>
         </div>
         <div>
-          <label className="block mb-1 font-medium" htmlFor="bio">
+          <label className="mb-1 block font-medium" htmlFor="bio">
             Bio
           </label>
           <textarea
@@ -190,11 +198,11 @@ export default function Page() {
             onChange={handleChange}
             disabled={!editMode}
             rows={3}
-            className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] outline-none disabled:opacity-50"
+            className="border-input focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] disabled:opacity-50"
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium" htmlFor="skills">
+          <label className="mb-1 block font-medium" htmlFor="skills">
             Skills (comma separated)
           </label>
           <Input
@@ -207,11 +215,16 @@ export default function Page() {
           />
         </div>
         {editMode && (
-          <div className="flex gap-4 mt-8 pt-6 border-t">
+          <div className="mt-8 flex gap-4 border-t pt-6">
             <Button type="submit" variant="default" className="flex-1">
               Save Changes
             </Button>
-            <Button type="button" variant="outline" onClick={handleCancel} className="flex-1">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleCancel}
+              className="flex-1"
+            >
               Cancel
             </Button>
           </div>
