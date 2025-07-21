@@ -37,11 +37,11 @@ export default async function Auth({ minimal }: AuthProps) {
               session.user.image ??
               `https://avatar.vercel.sh/${session.user.email}`
             }
-            className="h-8 w-8 cursor-pointer rounded-full border object-cover"
+            className="h-10 w-10 cursor-pointer rounded-full border object-cover select-none"
             alt="Profile"
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="mt-1 mr-4">
+        <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>

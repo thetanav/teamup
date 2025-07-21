@@ -3,30 +3,40 @@ import { Button } from "@/components/ui/button";
 import Auth from "@/components/auth";
 import Image from "next/image";
 import { auth } from "@/server/auth";
+import { Instrument_Serif } from "next/font/google";
+
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400" });
 
 export default async function HomePage() {
   const session = await auth();
   return (
     <main className="bg-background flex min-h-[80vh] flex-col items-center justify-center gap-12 px-4 py-12">
       {/* Hero Section */}
-      <section className="flex max-w-2xl flex-col items-center gap-4 text-center">
+      <section className="my-16 flex max-w-2xl flex-col items-center gap-8 text-center">
         <div>
           <Image
             src="/logo.png"
             alt="teamupp"
             width={150}
             height={150}
-            className="rounded-2xl select-none"
+            className="rounded-4xl select-none"
             draggable="false"
           />
         </div>
-        <h1 className="mb-4 text-3xl leading-tight font-extrabold tracking-tight sm:mb-2 md:text-5xl">
-          Find Your Perfect Team,{" "}
+        <h1
+          className={
+            "mt-2 mb-4 text-5xl leading-tight font-extrabold tracking-tight sm:mb-2 md:text-6xl " +
+            serif.className
+          }
+        >
+          Find Your Perfect Team,
+          <br />
           <span className="text-primary">From Your College or City</span>
         </h1>
         <p className="text-muted-foreground mb-4 text-lg">
-          TeamUp helps you connect with like-minded people from your own college
-          or city to build amazing teams for projects, hackathons, and more.
+          Teamupp helps you connect with like-minded people from your own
+          college or city to build amazing teams for projects, hackathons, and
+          more.
         </p>
         {session?.user ? (
           <>

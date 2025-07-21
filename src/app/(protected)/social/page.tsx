@@ -1,25 +1,25 @@
-export default async function IdeasPage() {
+export default async function SocialPage() {
   return (
     <section className="flex min-h-[80vh] flex-1 flex-col items-center justify-center">
       <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-8 text-center">
         <div className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-white">
-            Ideas Hub
+            Social Features
           </h1>
           <h2 className="text-2xl font-semibold text-gray-300">Coming Soon</h2>
         </div>
 
         <div className="max-w-lg space-y-4">
           <p className="text-lg text-gray-400">
-            We're creating a collaborative space where you can share, discover,
-            and develop amazing project ideas with your team.
+            We're building an amazing social experience to help you connect with
+            your teammates and the community.
           </p>
 
           <div className="space-y-2 text-sm text-gray-500">
-            <p>💡 Share and discover project ideas</p>
-            <p>🚀 Collaborate on innovative concepts</p>
-            <p>📊 Vote and rank the best ideas</p>
-            <p>🎯 Turn ideas into actionable projects</p>
+            <p>🤝 Connect with team members</p>
+            <p>💬 Team chat and messaging</p>
+            <p>📱 Activity feeds and updates</p>
+            <p>🎉 Social interactions and reactions</p>
           </div>
         </div>
 

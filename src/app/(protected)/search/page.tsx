@@ -30,9 +30,7 @@ export default async function SearchPage({
       or(
         ilike(users.college, `%${universalQuery}%`),
         ilike(users.city, `%${universalQuery}%`),
-        ilike(users.course, `%${universalQuery}%`),
         ilike(users.skills, `%${universalQuery}%`),
-        ilike(users.name, `%${universalQuery}%`),
       ),
     );
   } else {
@@ -93,7 +91,7 @@ export default async function SearchPage({
 
   return (
     <main className="bg-background flex min-h-[80vh] px-4 py-12">
-      <aside className="hidden w-full max-w-xs pr-8 md:block">
+      <aside className="hidden w-full max-w-sm pr-8 md:block">
         <div className="sticky top-24 flex flex-col gap-6">
           <div className="bg-card rounded-lg p-6 shadow">
             <h2 className="mb-2 text-xl font-semibold">Advanced Search</h2>
@@ -148,11 +146,7 @@ export default async function SearchPage({
 
       {/* Main Content */}
       <section className="flex flex-1 flex-col items-center">
-        <div className="mx-auto mb-8 flex w-full max-w-2xl flex-col gap-4">
-          <h1 className="mb-2 text-4xl leading-tight font-extrabold tracking-tight">
-            Search for teammates
-          </h1>
-
+        <div className="mx-auto mb-8 flex w-full max-w-3xl flex-col gap-4">
           {/* Mobile Advanced Search */}
           <div className="mb-4 md:hidden">
             <details className="bg-card rounded-lg border shadow">
@@ -269,10 +263,10 @@ export default async function SearchPage({
         </div>
 
         {/* Search results */}
-        <div className="bg-card mx-auto flex min-h-[300px] w-full max-w-2xl flex-col overflow-y-auto rounded-lg p-6 shadow">
+        <div className="mx-auto flex min-h-[300px] w-full max-w-3xl flex-col overflow-y-auto">
           {usrs && usrs.length > 0 ? (
             <>
-              <div className="mb-4 flex flex-col gap-2">
+              <div className="mb-4 flex flex-col gap-1">
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-semibold">
                     Found {usrs.length} teammate{usrs.length !== 1 ? "s" : ""}
@@ -288,7 +282,7 @@ export default async function SearchPage({
               <ul className="flex w-full flex-col gap-3">
                 {usrs.map((usr, index) => (
                   <Link key={usr.id} href={`/profile/${usr.id}`}>
-                    <li className="group flex w-full cursor-pointer gap-3 rounded-lg border p-4 transition-all hover:shadow-md">
+                    <li className="group hover:bg-muted flex w-full cursor-pointer gap-3 rounded-lg border p-4 transition-all">
                       <div className="relative h-fit">
                         <img
                           src={
@@ -384,6 +378,18 @@ export default async function SearchPage({
           )}
         </div>
       </section>
+
+      {/* Sponsored Content */}
+      <aside className="hidden w-full max-w-sm pr-8 xl:block">
+        <div className="sticky top-24 flex flex-col gap-6">
+          <div className="bg-card rounded-lg p-6 shadow">
+            <h2 className="mb-2 text-xl font-semibold">Updates</h2>
+            <div className="text-muted-foreground flex min-h-72 justify-center">
+              no updates tell now
+            </div>
+          </div>
+        </div>
+      </aside>
     </main>
   );
 }
